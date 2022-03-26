@@ -83,19 +83,4 @@ public class Triangle2 extends TriangleBase {
         this.leftPoint = HW2Utils.getLeftPointFromCenterLengthEdge(getCenter(), lengthEdge, isUp);
         this.lengthEdge = lengthEdge;
     }
-
-    @Override
-    public void moveVertical(double delta) {
-        leftPoint.moveVertical(delta);
-    }
-
-    @Override
-    public void moveHorizontal(final double delta) {
-        leftPoint.moveHorizontal(delta);
-    }
-
-    @Override
-    public void move(final Point delta) {
-        leftPoint.move(delta);
-    }
 }
