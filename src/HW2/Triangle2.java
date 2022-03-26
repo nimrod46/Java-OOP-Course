@@ -85,28 +85,17 @@ public class Triangle2 extends TriangleBase {
     }
 
     @Override
-    public void moveVertical(final double delta) {
-
-
+    public void moveVertical(double delta) {
+        leftPoint.moveVertical(delta);
     }
 
     @Override
     public void moveHorizontal(final double delta) {
-
+        leftPoint.moveHorizontal(delta);
     }
 
     @Override
     public void move(final Point delta) {
-
-    }
-
-    @Override
-    public boolean contains(final Point p) {
-        return false;
-    }
-
-    @Override
-    public boolean contains(final Triangle triangle) {
-        return false;
+        leftPoint.move(delta);
     }
 }
