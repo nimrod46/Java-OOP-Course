@@ -13,6 +13,26 @@ public abstract class TriangleBase implements Triangle {
     }
 
     @Override
+    public final void moveVertical(final double delta) {
+        Point newCenter = getCenter();
+        newCenter.moveVertical(delta);
+        setCenter(newCenter);
+    }
+
+    @Override
+    public final void moveHorizontal(final double delta) {
+        Point newCenter = getCenter();
+        newCenter.moveHorizontal(delta);
+        setCenter(newCenter);
+    }
+
+    @Override
+    public final void move(final Point delta) {
+        Point newCenter = getCenter();
+        newCenter.move(delta);
+        setCenter(newCenter);      }
+
+    @Override
     public double getArea() {
         return height() * getLengthEdge() / 2;
     }

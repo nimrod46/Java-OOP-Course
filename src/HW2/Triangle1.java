@@ -79,19 +79,4 @@ public class Triangle1 extends TriangleBase {
         }
         height = newHeight;
     }
-
-    @Override
-    public void moveVertical(final double delta) {
-        center.moveVertical(delta);
-    }
-
-    @Override
-    public void moveHorizontal(final double delta) {
-        center.moveHorizontal(delta);
-    }
-
-    @Override
-    public void move(final Point delta) {
-        center.move(delta);
-    }
 }
