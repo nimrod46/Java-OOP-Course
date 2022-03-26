@@ -57,13 +57,13 @@ public abstract class TriangleBase implements Triangle {
             return false;
         }
         Point[] vertices = getVertices();
-         if(HW2Utils.getDistance(vertices[0], p) > getLengthEdge()) {
+         if(getDistance(vertices[0], p) > getLengthEdge()) {
              return false;
          }
-        if(HW2Utils.getDistance(vertices[1], p) > getLengthEdge()) {
+        if(getDistance(vertices[1], p) > getLengthEdge()) {
             return false;
         }
-        return !(HW2Utils.getDistance(vertices[2], p) > getLengthEdge());
+        return !(getDistance(vertices[2], p) > getLengthEdge());
     }
 
     @Override
@@ -76,5 +76,11 @@ public abstract class TriangleBase implements Triangle {
             return false;
         }
         return contains(otherVertices[2]);
+    }
+
+    private static double getDistance(Point p1, Point p2) {
+        double distance = Math.pow(p1.getX() - p2.getX(), 2) + Math.pow(p1.getY() - p2.getY(), 2);
+        distance = Math.sqrt(distance);
+        return distance;
     }
 }
