@@ -85,12 +85,8 @@ public class Triangle2 extends TriangleBase {
     }
 
     @Override
-    public void scale(double scalePar) {
-
-    }
-
-    @Override
     public void moveVertical(final double delta) {
+
 
     }
 

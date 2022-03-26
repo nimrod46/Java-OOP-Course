@@ -21,4 +21,13 @@ public abstract class TriangleBase implements Triangle {
     public double getPerimeter() {
         return getLengthEdge() * 3;
     }
+
+    @Override
+    public void scale(double scalePar) {
+        if(scalePar<=0) {
+            return;
+        }
+
+        updateLengthEdge(getLengthEdge() * scalePar);
+    }
 }
