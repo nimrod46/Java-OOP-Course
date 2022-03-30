@@ -58,7 +58,7 @@ public class Triangle2 extends TriangleBase {
 
     @Override
     public void inverse() {
-        var pointC = getVertices()[2];
+        Point pointC = getVertices()[2];
         leftPoint.setY(pointC.getY());
         isUp = !isUp;
     }
