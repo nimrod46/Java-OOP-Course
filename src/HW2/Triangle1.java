@@ -53,6 +53,10 @@ public class Triangle1 extends TriangleBase {
 
     @Override
     public void inverse() {
+        var pointA = getVertices()[0];
+        var pointC = getVertices()[2];
+        pointA.setY(pointC.getY());
         height *= -1;
+        center = HW2Utils.getCenterFromLeftPointLengthEdge(pointA, getLengthEdge(), isUpTriangle());
     }
 }
