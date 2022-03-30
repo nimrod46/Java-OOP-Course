@@ -27,27 +27,13 @@ public class Triangle2 extends TriangleBase {
     }
 
     @Override
-    public Point[] getVertices() {
-        Point b = leftPoint.copy();
-        b.moveHorizontal(getLengthEdge());
-        Point c = getCenter().copy();
-        c.setY(leftPoint.getY() + height() * (isUp ? 1 : -1));
-        return new Point[]{leftPoint.copy(), b, c};
-    }
-
-    @Override
     public Point getCenter() {
-        return HW2Utils.getCenterFromLeftPointLengthEdge(leftPoint, getLengthEdge(), isUp);
+        return HW2Utils.getCenterFromLeftPointLengthEdge(leftPoint, lengthEdge, isUp);
     }
 
     @Override
     public double height() {
-        return HW2Utils.getHeightFromLengthEdge(getLengthEdge());
-    }
-
-    @Override
-    public double getLengthEdge() {
-        return lengthEdge;
+        return HW2Utils.getHeightFromLengthEdge(lengthEdge);
     }
 
     @Override
@@ -73,14 +59,5 @@ public class Triangle2 extends TriangleBase {
     @Override
     public void inverse() {
         isUp = !isUp;
-    }
-
-    @Override
-    public void updateLengthEdge(double lengthEdge) {
-        if (lengthEdge <= 0) {
-            return;
-        }
-        this.leftPoint = HW2Utils.getLeftPointFromCenterLengthEdge(getCenter(), lengthEdge, isUp);
-        this.lengthEdge = lengthEdge;
     }
 }

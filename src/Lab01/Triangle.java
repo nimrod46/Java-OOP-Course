@@ -176,7 +176,7 @@ public class Triangle
     private void draw()
     {
         if(isVisible) {
-            Ex1.Canvas canvas = Ex1.Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas();
             int[] xpoints = { xPosition, xPosition + (width/2), xPosition - (width/2) };
             int[] ypoints = { yPosition, yPosition + height, yPosition + height };
             canvas.draw(this, color, new Polygon(xpoints, ypoints, 3));
@@ -190,7 +190,7 @@ public class Triangle
     private void erase()
     {
         if(isVisible) {
-            Ex1.Canvas canvas = Canvas.getCanvas();
+            Canvas canvas = Canvas.getCanvas();
             canvas.erase(this);
         }
     }

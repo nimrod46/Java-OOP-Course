@@ -30,7 +30,8 @@ public abstract class TriangleBase implements Triangle {
     public final void move(final Point delta) {
         Point newCenter = getCenter();
         newCenter.move(delta);
-        setCenter(newCenter);      }
+        setCenter(newCenter);
+    }
 
     @Override
     public double getArea() {
@@ -44,7 +45,7 @@ public abstract class TriangleBase implements Triangle {
 
     @Override
     public void scale(double scalePar) {
-        if(scalePar<=0) {
+        if (scalePar <= 0) {
             return;
         }
 
@@ -53,14 +54,14 @@ public abstract class TriangleBase implements Triangle {
 
     @Override
     public boolean contains(Point p) {
-        if(p == null) {
+        if (p == null) {
             return false;
         }
         Point[] vertices = getVertices();
-         if(getDistance(vertices[0], p) > getLengthEdge()) {
-             return false;
-         }
-        if(getDistance(vertices[1], p) > getLengthEdge()) {
+        if (getDistance(vertices[0], p) > getLengthEdge()) {
+            return false;
+        }
+        if (getDistance(vertices[1], p) > getLengthEdge()) {
             return false;
         }
         return !(getDistance(vertices[2], p) > getLengthEdge());
@@ -69,13 +70,37 @@ public abstract class TriangleBase implements Triangle {
     @Override
     public boolean contains(Triangle triangle) {
         Point[] otherVertices = triangle.getVertices();
-        if(!contains(otherVertices[0])) {
+        if (!contains(otherVertices[0])) {
             return false;
         }
-        if(!contains(otherVertices[1])) {
+        if (!contains(otherVertices[1])) {
             return false;
         }
         return contains(otherVertices[2]);
+    }
+
+    @Override
+    public Point[] getVertices() {
+        Point a = HW2Utils.getLeftPointFromCenterLengthEdge(getCenter(), getLengthEdge(), isUpTriangle());
+        Point b = a.copy();
+        b.moveHorizontal(getLengthEdge());
+        Point c = getCenter();
+        c.setY(a.getY() + height() * (isUpTriangle() ? 1 : -1));
+        return new Point[]{a, b, c};
+    }
+
+    @Override
+    public double getLengthEdge() {
+        return HW2Utils.getLengthEdgeFromHeight(height());
+    }
+
+    @Override
+    public void updateLengthEdge(double lengthEdge) {
+        if (lengthEdge <= 0) {
+            return;
+        }
+        double newHeight = HW2Utils.getHeightFromLengthEdge(lengthEdge);
+        updateHeight(newHeight);
     }
 
     private static double getDistance(Point p1, Point p2) {

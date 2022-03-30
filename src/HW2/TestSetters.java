@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import HW2.Triangle1;
-import HW2.Triangle2;
 import org.junit.Before;
 import org.junit.Test;
 
