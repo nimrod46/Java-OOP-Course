@@ -3,11 +3,13 @@ package HW3;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class GraphBase<V extends Comparable<V>> implements IGraph<V> {
+public abstract class BaseGraph<V extends Comparable<V>> implements IGraph<V> {
 
     private final SortedMap<V, SortedSet<V>> vertices;
+    private final String type;
 
-    public GraphBase() {
+    public BaseGraph(String type) {
+        this.type = type;
         this.vertices = new TreeMap<>();
     }
 
@@ -58,7 +60,7 @@ public abstract class GraphBase<V extends Comparable<V>> implements IGraph<V> {
 
     @Override
     public String getGraphType() {
-        return "Directed";
+        return type;
     }
 
     @Override
