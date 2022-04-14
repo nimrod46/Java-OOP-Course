@@ -58,13 +58,13 @@ public abstract class TriangleBase implements Triangle {
             return false;
         }
         Point[] vertices = getVertices();
-        if (getDistance(vertices[0], p) > getLengthEdge()) {
+        if (HW2Utils.getDistance(vertices[0], p) > getLengthEdge()) {
             return false;
         }
-        if (getDistance(vertices[1], p) > getLengthEdge()) {
+        if (HW2Utils.getDistance(vertices[1], p) > getLengthEdge()) {
             return false;
         }
-        return !(getDistance(vertices[2], p) > getLengthEdge());
+        return !(HW2Utils.getDistance(vertices[2], p) > getLengthEdge());
     }
 
     @Override
@@ -101,11 +101,5 @@ public abstract class TriangleBase implements Triangle {
         }
         double newHeight = HW2Utils.getHeightFromLengthEdge(lengthEdge);
         updateHeight(newHeight);
-    }
-
-    private static double getDistance(Point p1, Point p2) {
-        double distance = Math.pow(p1.getX() - p2.getX(), 2) + Math.pow(p1.getY() - p2.getY(), 2);
-        distance = Math.sqrt(distance);
-        return distance;
     }
 }
