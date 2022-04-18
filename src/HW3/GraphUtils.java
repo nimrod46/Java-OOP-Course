@@ -23,7 +23,7 @@ public class GraphUtils {
     }
 
     public static IGraph<String> toGraph(String s) {
-        String[] asrrs = s.replace("\t", "").replaceAll(" ", ":").split(":");
+        String[] asrrs = s.replace("\n", "").replace("\t", "").replaceAll(" ", ":").split(":");
         IGraph<String> graph;
         if (asrrs[0].equals("DirectedGraph")) {
             graph = new DirectedGraph<>();
@@ -34,7 +34,8 @@ public class GraphUtils {
         for (int i = 1; i < asrrs.length; i += 2) {
             String vertex = asrrs[i];
             String[] edges = asrrs[i + 1].replace("{", "").replace("}", "").split(",");
-            Arrays.stream(edges).forEach(e -> graph.addEdge(vertex,e));
+            graph.addVertex(vertex);
+            Arrays.stream(edges).filter(st -> !st.isEmpty()).forEach(e -> graph.addEdge(vertex,e));
         }
         return graph;
     }
