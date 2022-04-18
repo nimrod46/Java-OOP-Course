@@ -6,12 +6,12 @@ import java.util.*;
 public class GraphsHandler {
 
     public static void main(String[] args) throws IOException {
-        Scanner userInput = new Scanner(System.in);
-        String fileName = userInput.next();
-        Scanner fileSc = new Scanner(new File(  fileName));
+
+        Scanner fileSc = new Scanner(new File( args[0]));
 
         List<IGraph<String>> list = new LinkedList<>();
         SortedSet<IGraph<String>> sortedSet = new TreeSet<>(GraphsHandler::compare);
+
         Writer errorsGraphs = new FileWriter("errorsGraphs.txt");
         String line;
         int lineNumber = 1;
@@ -30,32 +30,28 @@ public class GraphsHandler {
         }
         errorsGraphs.flush();
         errorsGraphs.close();
-        Writer graphsOutList = new FileWriter("GraphsOutList.txt");
 
-        for (IGraph<String> Graph : list) {
-            graphsOutList.write(Graph.toString());
-            graphsOutList.write("\n");
-        }
-        graphsOutList.flush();
-        graphsOutList.close();
+        Writer graphsOutList = new FileWriter("GraphsOutList.txt");
+        writeGraphsToFile(list, graphsOutList);
 
         Writer graphsSortOutSet = new FileWriter("GraphsSortOutSet.txt");
-        for (IGraph<String> Graph : sortedSet) {
-            graphsSortOutSet.write(Graph.toString());
-            graphsSortOutSet.write("\n");
-        }
-        graphsSortOutSet.flush();
-        graphsSortOutSet.close();
-
+        writeGraphsToFile(sortedSet, graphsSortOutSet);
 
         Writer GraphsSortOutList = new FileWriter("GraphsSortOutList.txt");
         list.sort(GraphsHandler::compare);
+        writeGraphsToFile(list, GraphsSortOutList);
+    }
+
+    private static void writeGraphsToFile(Iterable<IGraph<String>> list, Writer writer) throws IOException {
+        StringBuilder sb = new StringBuilder();
         for (IGraph<String> Graph : list) {
-            GraphsSortOutList.write(Graph.toString());
-            GraphsSortOutList.write("\n");
+            sb.append(Graph);
+            sb.append("\n");
         }
-        GraphsSortOutList.flush();
-        GraphsSortOutList.close();
+        sb.delete(sb.lastIndexOf("\n"), sb.length());
+        writer.write(sb.toString());
+        writer.flush();
+        writer.close();
     }
 
     private static int compare(IGraph<String> o1, IGraph<String> o2) {
