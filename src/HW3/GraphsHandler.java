@@ -12,13 +12,23 @@ public class GraphsHandler {
 
         List<IGraph<String>> list = new LinkedList<>();
         SortedSet<IGraph<String>> sortedSet = new TreeSet<>(GraphsHandler::compare);
+        Writer errorsGraphs = new FileWriter("errorsGraphs.txt");
         String line;
+        int lineNumber = 1;
         while (fileSc.hasNextLine()) {
             line = fileSc.nextLine();
-            IGraph<String> graph = GraphUtils.toGraph(line);
-            list.add(0, graph);
-            sortedSet.add(graph);
+            IGraph<String> graph;
+            try {
+                graph = GraphUtils.toGraph(line);
+                list.add(0, graph);
+                sortedSet.add(graph);
+            } catch (HW3Exception e) {
+                errorsGraphs.write(String.format("line number = %d, input line = \"%s\" , Error message = %s\n", lineNumber, line, e.getMessage()));
+            }
+            lineNumber++;
         }
+        errorsGraphs.flush();
+        errorsGraphs.close();
         Writer graphsOutList = new FileWriter("GraphsOutList.txt");
 
         for (IGraph<String> Graph : list) {

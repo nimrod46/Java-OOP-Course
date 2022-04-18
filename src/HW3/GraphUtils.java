@@ -22,21 +22,36 @@ public class GraphUtils {
         return Math.abs(d1 - d2) < PRECISION;
     }
 
-    public static IGraph<String> toGraph(String s) {
-        String[] asrrs = s.replace("\n", "").replace("\t", "").replaceAll(" ", ":").split(":");
-        IGraph<String> graph;
-        if (asrrs[0].equals("DirectedGraph")) {
-            graph = new DirectedGraph<>();
-        } else {
-            graph = new UndirectedGraph<>();
-        }
+    public static IGraph<String> toGraph(String s) throws HW3Exception {
+        try {
+            if (s.split(":")[1].charAt(0) != '\t') {
+                throw new HW3Exception("The graph string is not valid");
+            }
 
-        for (int i = 1; i < asrrs.length; i += 2) {
-            String vertex = asrrs[i];
-            String[] edges = asrrs[i + 1].replace("{", "").replace("}", "").split(",");
-            graph.addVertex(vertex);
-            Arrays.stream(edges).filter(st -> !st.isEmpty()).forEach(e -> graph.addEdge(vertex,e));
+            String[] asrrs = s.replace("\n", "").replace("\t", "").replaceAll(" ", ":").split(":");
+            IGraph<String> graph;
+            if (asrrs[0].equals("DirectedGraph")) {
+                graph = new DirectedGraph<>();
+            } else if (asrrs[0].equals("UndirectedGraph")) {
+                graph = new UndirectedGraph<>();
+            } else {
+                throw new HW3Exception("The graph type is not valid");
+            }
+
+            for (int i = 1; i < asrrs.length; i += 2) {
+                String vertex = asrrs[i];
+                if (asrrs[i + 1].indexOf("{") != 0 || asrrs[i + 1].indexOf("}") != asrrs[i + 1].length() - 1) {
+                    throw new HW3Exception("The graph string is not valid");
+                }
+                String[] edges = asrrs[i + 1].replace("{", "").replace("}", "").split(",");
+                graph.addVertex(vertex);
+                Arrays.stream(edges).filter(st -> !st.isEmpty()).forEach(e -> graph.addEdge(vertex, e));
+            }
+            return graph;
+        } catch (HW3Exception e) {
+            throw e;
+        } catch (Exception e) {
+            throw new HW3Exception("");
         }
-        return graph;
     }
 }
