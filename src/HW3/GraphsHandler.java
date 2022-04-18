@@ -23,7 +23,8 @@ public class GraphsHandler {
                 list.add(0, graph);
                 sortedSet.add(graph);
             } catch (HW3Exception e) {
-                errorsGraphs.write(String.format("line number = %d, input line = \"%s\" , Error message = %s\n", lineNumber, line, e.getMessage()));
+                errorsGraphs.write(String.format("line number = %d, input line = \"%s\" , Error message = %s\n",
+                        lineNumber, line, e.getMessage()));
             }
             lineNumber++;
         }
@@ -55,8 +56,6 @@ public class GraphsHandler {
         }
         GraphsSortOutList.flush();
         GraphsSortOutList.close();
-
-
     }
 
     private static int compare(IGraph<String> o1, IGraph<String> o2) {

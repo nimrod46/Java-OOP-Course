@@ -1,8 +1,6 @@
 package HW3;
 
-import java.io.File;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class GraphUtils {
     private static final double PRECISION = 1.0e-2;
@@ -28,30 +26,41 @@ public class GraphUtils {
                 throw new HW3Exception("The graph string is not valid");
             }
 
-            String[] asrrs = s.replace("\n", "").replace("\t", "").replaceAll(" ", ":").split(":");
-            IGraph<String> graph;
-            if (asrrs[0].equals("DirectedGraph")) {
-                graph = new DirectedGraph<>();
-            } else if (asrrs[0].equals("UndirectedGraph")) {
-                graph = new UndirectedGraph<>();
-            } else {
-                throw new HW3Exception("The graph type is not valid");
-            }
+            String[] verticesAndEdges = s.replace("\n", "").replace("\t", "")
+                    .replaceAll(" ", ":").split(":");
 
-            for (int i = 1; i < asrrs.length; i += 2) {
-                String vertex = asrrs[i];
-                if (asrrs[i + 1].indexOf("{") != 0 || asrrs[i + 1].indexOf("}") != asrrs[i + 1].length() - 1) {
-                    throw new HW3Exception("The graph string is not valid");
-                }
-                String[] edges = asrrs[i + 1].replace("{", "").replace("}", "").split(",");
-                graph.addVertex(vertex);
-                Arrays.stream(edges).filter(st -> !st.isEmpty()).forEach(e -> graph.addEdge(vertex, e));
-            }
+
+            IGraph<String> graph = graphByType(verticesAndEdges[0]);
+
+            fillGraphByVertices(verticesAndEdges, graph);
             return graph;
         } catch (HW3Exception e) {
             throw e;
         } catch (Exception e) {
             throw new HW3Exception("");
+        }
+    }
+
+    private static IGraph<String> graphByType(String graphType) throws HW3Exception {
+        if (graphType.equals("DirectedGraph")) {
+            return new DirectedGraph<>();
+        }
+        if (graphType.equals("UndirectedGraph")) {
+            return new UndirectedGraph<>();
+        }
+        throw new HW3Exception("The graph type is not valid");
+    }
+
+    private static void fillGraphByVertices(String[] verticesAndEdges, IGraph<String> graph) throws HW3Exception {
+        for (int i = 1; i < verticesAndEdges.length; i += 2) {
+            String vertex = verticesAndEdges[i];
+            if (verticesAndEdges[i + 1].indexOf("{") != 0 || verticesAndEdges[i + 1].indexOf("}") != verticesAndEdges[i + 1].length() - 1) {
+                throw new HW3Exception("The graph string is not valid");
+            }
+            String[] edges = verticesAndEdges[i + 1].replace("{", "").replace("}", "")
+                    .split(",");
+            graph.addVertex(vertex);
+            Arrays.stream(edges).filter(st -> !st.isEmpty()).forEach(e -> graph.addEdge(vertex, e));
         }
     }
 }
