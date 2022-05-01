@@ -29,8 +29,7 @@ public class GraphUtils {
             String[] verticesAndEdges = s.replace("\n", "").replace("\t", "")
                     .replaceAll(" ", ":").split(":");
 
-
-            IGraph<String> graph = graphByType(verticesAndEdges[0]);
+            IGraph<String> graph = getGraphByType(verticesAndEdges[0]);
 
             fillGraphByVertices(verticesAndEdges, graph);
             return graph;
@@ -41,7 +40,7 @@ public class GraphUtils {
         }
     }
 
-    private static IGraph<String> graphByType(String graphType) throws HW3Exception {
+    private static IGraph<String> getGraphByType(String graphType) throws HW3Exception {
         if (graphType.equals("DirectedGraph")) {
             return new DirectedGraph<>();
         }

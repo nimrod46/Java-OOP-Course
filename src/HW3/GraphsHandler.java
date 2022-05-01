@@ -13,6 +13,7 @@ public class GraphsHandler {
         SortedSet<IGraph<String>> sortedSet = new TreeSet<>(GraphsHandler::compare);
 
         Writer errorsGraphs = new FileWriter("errorsGraphs.txt");
+
         String line;
         int lineNumber = 1;
         while (fileSc.hasNextLine()) {
@@ -23,12 +24,11 @@ public class GraphsHandler {
                 list.add(0, graph);
                 sortedSet.add(graph);
             } catch (HW3Exception e) {
-                errorsGraphs.write(String.format("line number = %d, input line = \"%s\" , Error message = %s\n",
-                        lineNumber, line, e.getMessage()));
+                e.writeToWriter(errorsGraphs, lineNumber, line);
             }
             lineNumber++;
         }
-        errorsGraphs.flush();
+
         errorsGraphs.close();
 
         Writer graphsOutList = new FileWriter("GraphsOutList.txt");
