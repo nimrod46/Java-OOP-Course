@@ -3,14 +3,14 @@ package HW3;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class BaseGraph<V extends Comparable<V>> implements IGraph<V> {
+public abstract class GraphBase<V extends Comparable<V>> implements IGraph<V> {
 
     private final SortedMap<V, SortedSet<V>> vertices;
     private final String type;
 
-    public BaseGraph(String type) {
+    public GraphBase(String type, SortedMap<V, SortedSet<V>> sortedMap) {
         this.type = type;
-        this.vertices = new TreeMap<>();
+        this.vertices = sortedMap;
     }
 
     @Override

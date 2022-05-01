@@ -1,9 +1,11 @@
 package HW3;
 
-public class UndirectedGraph<V extends Comparable<V>> extends BaseGraph<V> {
+import java.util.TreeMap;
+
+public class UndirectedGraph<V extends Comparable<V>> extends GraphBase<V> {
 
     public UndirectedGraph() {
-        super("Undirected");
+        super("Undirected", new TreeMap<>());
     }
 
     @Override

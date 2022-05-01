@@ -1,8 +1,10 @@
 package HW3;
 
-public class DirectedGraph<V extends Comparable<V>> extends BaseGraph<V> {
+import java.util.TreeMap;
+
+public class DirectedGraph<V extends Comparable<V>> extends GraphBase<V> {
 
     public DirectedGraph() {
-        super("Directed");
+        super("Directed", new TreeMap<>());
     }
 }
