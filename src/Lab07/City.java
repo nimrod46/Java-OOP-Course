@@ -4,7 +4,6 @@ public class City implements Comparable<City> {
 
     private final String name;
     private final String country;
-
     private int population;
     private int area;
 
