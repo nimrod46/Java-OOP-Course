@@ -15,7 +15,7 @@ public class Cities {
 
     public void init(String fileName) {
 
-        FileReader file = null;
+        FileReader file;
         try {
             file = new FileReader(fileName);
         } catch (FileNotFoundException e) {
@@ -36,47 +36,24 @@ public class Cities {
     }
 
     public void listAlphabetically() {
-        System.out.println();
-        System.out.println("City list");
-        System.out.println();
-
-        for (City city : cityList) {
-            formatPrint(null,city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
-        }
+        listCities("City list", new ArrayList<>(cityList));
     }
 
     public void listByCountry(String country) {
-        System.out.println();
-        System.out.printf("Cities in %s:\n", country);
-        System.out.println();
-
-        for (City city : cityList.stream().filter(c -> c.getCountry().equals(country)).collect(Collectors.toList())) {
-            formatPrint(null,city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
-        }
+        listCities("Cities in " + country + ":", cityList.stream().
+                filter(c -> c.getCountry().equals(country)).collect(Collectors.toList()));
     }
 
     public void listByPopulation() {
-        System.out.println();
-        System.out.println("City list by population");
-        System.out.println();
-
-        for (City city : cityList.stream().sorted(Collections.reverseOrder(Comparator.comparingInt(City::getPopulation)))
-                .collect(Collectors.toList())) {
-            formatPrint(null,city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
-            //System.out.printf("%s(%s) population: %d area: %d\n", city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
-        }
+        listCities("City list by population",
+                cityList.stream().sorted(Collections.reverseOrder(Comparator.comparingInt(City::getPopulation)))
+                        .collect(Collectors.toList()));
     }
 
     public void listByDensity() {
-        System.out.println();
-        System.out.println("City list by density");
-        System.out.println();
-
-        for (City city : cityList.stream().sorted(Comparator.comparingInt(value -> value.getPopulation() / value.getArea()))
-                .collect(Collectors.toList())) {
-            formatPrint(" density: %d\n",city.getName(), city.getCountry(),
-                    city.getPopulation(), city.getArea(), city.getPopulation() / city.getArea());
-        }
+        listCities("City list by density",
+                cityList.stream().sorted(Comparator.comparingInt(value -> value.getPopulation() / value.getArea()))
+                        .collect(Collectors.toList()));
     }
 
     private static void listCities(String title, List<City> cities) {
@@ -84,12 +61,12 @@ public class Cities {
         System.out.println(title);
         System.out.println();
         for (City city : cities) {
-            formatPrint(null,city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
+            formatPrint(null, city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
         }
     }
 
     private static void formatPrint(String ext, Object... params) {
-        if(ext == null || ext.trim().isEmpty()) {
+        if (ext == null || ext.trim().isEmpty()) {
             ext = "\n";
         }
         System.out.printf("%s(%s) population: %d area: %d" + ext, params);
