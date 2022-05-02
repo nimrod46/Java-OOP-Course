@@ -1,0 +1,80 @@
+Tokyo	Japan	37977000	8230
+Delhi	India	29617000	2232
+Shanghai	China	22120000	4068
+Sao Paulo	Brazil	22046000	3116
+Mexico City	Mexico	20996000	2386
+Cairo	Egypt	19372000	2010
+Mumbai	India	23355000	944
+Beijing	China	19433000	4172
+Dhaka	Bangladesh	15443000	456
+Osaka	Japan	14977000	3019
+New York City	United States	20870000	12093
+Karachi	Pakistan	14835000	1044
+Buenos Aires	Argentina	16157000	3221
+Chongqing	China	7739000	1537
+Istanbul	Turkey	15154000	1375
+Kolkata	India	17560000	1351
+Manila	Philippines	23088000	1873
+Lagos	Nigeria	15279000	1965
+Rio de Janeiro	Brazil	12272000	1912
+Tianjin	China	10800000	2813
+Kinshasa	Congo	13528000	473
+Guangzhou	China	20902000	4342
+Los Angeles	United States	15402000	6351
+Moscow	Russia	17125000	5891
+Shenzhen	China	15929000	1803
+Lahore	Pakistan	11021000	853
+Bangalore	India	13707000	1205
+Paris	France	11020000	2509
+Bogota	Colombia	9464000	584
+Jakarta	Indonesia	34540000	3540
+Chennai	India	11324000	1049
+Lima	Peru	9848000	890
+Bangkok	Thailand	17066000	3199
+Seoul	South Korea	21794000	2768
+Nagoya	Japan	9113000	3704
+Hyderabad	India	9746000	1273
+London	United Kingdom	10979000	1739
+Tehran	Iran	13633000	1704
+Chicago	United States	9014000	7006
+Chengdu	China	11309000	1828
+Nanjing	China	7496000	1613
+Wuhan	China	8962000	1646
+Ho Chi Minh City	Vietnam	13312000	1638
+Luanda	Angola	8417000	1023
+Ahmedabad	India	7410000	359
+Kuala Lumpur	Malaysia	8285000	2162
+Xian	China	7135000	1088
+Hong Kong	China	7347000	291
+Dongguan	China	7981000	1755
+Hangzhou	China	6446000	1446
+Shenyang	China	7105000	1515
+Riyadh	Saudi Arabia	6881000	1672
+Baghdad	Iraq	5796000	693
+Santiago	Chile	7007000	1148
+Surat	India	5807000	238
+Madrid	Spain	6026000	1365
+Suzhou	China	5250000	1373
+Pune	India	7764000	649
+Harbin	China	4458000	670
+Houston	United States	6406000	4930
+Dallas	United States	6830000	5279
+Toronto	Canada	6871000	2334
+Dar es Salaam	Tanzania	6698000	604
+Miami	United States	6144000	3313
+Belo Horizonte	Brazil	5159000	1288
+Singapore	Singapore	5745000	523
+Philadelphia	United States	5684000	5430
+Atlanta	United States	5361000	7400
+Fukuoka	Japan	2128000	504
+Khartoum	Sudan	7282000	1031
+Barcelona	Spain	4588000	1072
+Johannesburg	South Africa	9505000	2542
+Saint Petersburg	Russia	5230000	1372
+Qingdao	China	5911000	1656
+Dalian	China	3776000	988
+Washington D.C.	United States	7518000	5500
+Yangon	Myanmar	6314000	603
+Alexandria	Egypt	4318000	292
+Jinan	China	4026000	797
+Guadalajara	Mexico	5253000	810
