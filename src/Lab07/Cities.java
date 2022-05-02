@@ -36,32 +36,33 @@ public class Cities {
     }
 
     public void listAlphabetically() {
-        listCities("City list", new ArrayList<>(cityList));
+        listCities("City list", null, new ArrayList<>(cityList));
     }
 
     public void listByCountry(String country) {
-        listCities("Cities in " + country + ":", cityList.stream().
+        listCities("Cities in " + country + ":", null, cityList.stream().
                 filter(c -> c.getCountry().equals(country)).collect(Collectors.toList()));
     }
 
     public void listByPopulation() {
-        listCities("City list by population",
+        listCities("City list by population", null,
                 cityList.stream().sorted(Collections.reverseOrder(Comparator.comparingInt(City::getPopulation)))
                         .collect(Collectors.toList()));
     }
 
     public void listByDensity() {
-        listCities("City list by density",
+        listCities("City list by density", " density: %d\n",
                 cityList.stream().sorted(Comparator.comparingInt(value -> value.getPopulation() / value.getArea()))
                         .collect(Collectors.toList()));
     }
 
-    private static void listCities(String title, List<City> cities) {
+    private static void listCities(String title, String ext, List<City> cities) {
         System.out.println();
         System.out.println(title);
         System.out.println();
         for (City city : cities) {
-            formatPrint(null, city.getName(), city.getCountry(), city.getPopulation(), city.getArea());
+            formatPrint(ext, city.getName(), city.getCountry(), city.getPopulation(), city.getArea(),
+                    city.getPopulation() / city.getArea());
         }
     }
 
