@@ -3,6 +3,7 @@ package Lab08;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -24,8 +25,8 @@ public class Lab08Test {
                     System.out.println("Defined product: " + productName);
                     break;
                 case "order":
-                    var prod = products.stream().filter(o -> o.getName().equals(productName)).findFirst();
-                    if(prod.isEmpty()) {
+                    Optional<Product> prod = products.stream().filter(o -> o.getName().equals(productName)).findFirst();
+                    if(!prod.isPresent()) {
                         System.out.println("Unknown product " + productName);
                         continue;
                     }
@@ -40,7 +41,7 @@ public class Lab08Test {
                     break;
                 case "supply":
                     prod = products.stream().filter(o -> o.getName().equals(productName)).findFirst();
-                    if(prod.isEmpty()) {
+                    if(!prod.isPresent()) {
                         System.out.println("Unknown product " + productName);
                         continue;
                     }

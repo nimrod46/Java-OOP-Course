@@ -1,5 +1,6 @@
 package Lab08;
 
+@SuppressWarnings("serial")
 public class OutOfStockException extends Exception {
 
     private final Product product;
