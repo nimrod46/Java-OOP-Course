@@ -1,0 +1,18 @@
+define    shoe      20
+order     shoe      10
+define    shirt     30
+order     shirt     10
+return    shirt     2
+
+define    pants     15
+define    hat       10
+supply    shoe      5
+order     shoe      8
+supply    gloves    2
+order     pants     10
+supply    hat       4
+
+order     pants     10
+supply    shirt     20
+supply    shoe      10
+order     pants     10
