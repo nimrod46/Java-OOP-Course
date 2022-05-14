@@ -6,7 +6,6 @@ import java.util.*;
 public class GraphsHandler {
 
     public static void main(String[] args) throws IOException {
-
         Scanner fileSc = new Scanner(new File( args[0]));
 
         List<IGraph<String>> list = new LinkedList<>();
