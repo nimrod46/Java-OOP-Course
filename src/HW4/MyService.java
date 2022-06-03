@@ -7,7 +7,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MyService implements Service {
-    private final Queue<Runnable> processesQueue;
+    private final Queue<Runnable> taskQueue;
     private final Lock lock;
     private final Map<Integer, Boolean> threadStateById;
     private final List<Thread> threadPool;
@@ -17,7 +17,7 @@ public class MyService implements Service {
     public MyService(int threadPoolSize) {
         lock = new ReentrantLock();
         isShutdown = false;
-        processesQueue = new ConcurrentLinkedQueue<>();
+        taskQueue = new ConcurrentLinkedQueue<>();
         threadStateById = new HashMap<>();
         threadPool = new ArrayList<>();
         cond = lock.newCondition();
@@ -32,7 +32,7 @@ public class MyService implements Service {
         if (isShutdown) {
             return;
         }
-        processesQueue.add(r);
+        taskQueue.add(r);
         lock.lock();
         cond.signal();
         lock.unlock();
@@ -71,13 +71,12 @@ public class MyService implements Service {
                 Runnable r;
                 try {
                     lock.lock();
-                    while (processesQueue.isEmpty())
+                    while (taskQueue.isEmpty())
                         cond.await();
-                    r = processesQueue.poll();
+                    r = taskQueue.poll();
                     threadStateById.put(id, true);
 
                 } catch (InterruptedException e) {
-                    //Do nothing
                     return;
                 }
                 finally {
@@ -95,6 +94,6 @@ public class MyService implements Service {
     }
 
     private boolean isStillWorking() {
-        return !processesQueue.isEmpty() || threadStateById.values().stream().allMatch(i -> i);
+        return !taskQueue.isEmpty() || threadStateById.values().stream().allMatch(i -> i);
     }
 }
