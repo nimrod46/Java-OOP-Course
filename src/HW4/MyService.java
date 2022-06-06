@@ -50,6 +50,9 @@ public class MyService implements Service {
     @Override
     public void shutdown() {
         isShutdown = true;
+        lock.lock();
+        cond.signalAll();
+        lock.unlock();
     }
 
     @Override
@@ -71,8 +74,13 @@ public class MyService implements Service {
                 Runnable r;
                 try {
                     lock.lock();
-                    while (taskQueue.isEmpty())
+                    while (taskQueue.isEmpty() && !isShutdown)
                         cond.await();
+
+                    if(isShutdown) {
+                        return;
+                    }
+
                     r = taskQueue.poll();
                     threadStateById.put(id, true);
 

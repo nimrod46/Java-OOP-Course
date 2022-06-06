@@ -20,7 +20,7 @@ public class Main {
                 }
             } );
         }
-      //  s.awaitTermination(); // only if implemented
+        s.awaitTermination(); // only if implemented
         System.out.println( "job done" );
         s.shutdown();
         System.out.println( "isShutdown() = " + s.isShutdown() );
