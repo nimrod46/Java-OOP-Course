@@ -14,7 +14,7 @@ public class Main {
                     long id = Thread.currentThread().getId();
                     System.out.println( "Thread: " + id + " task: " + this );
                     for( int i = 0; i < 100000000; i++ ) { // take some time
-                        double d = Math.sin((double) i);
+                        double d = Math.sin(i);
                     }
                     System.out.println( "Thread: " + id + " end " );
                 }

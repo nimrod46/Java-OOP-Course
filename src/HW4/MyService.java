@@ -13,24 +13,27 @@ public class MyService implements Service {
     private final List<Thread> threadPool;
     private final Condition cond;
     private boolean isShutdown;
+    private boolean isShutdownNow;
 
     public MyService(int threadPoolSize) {
         lock = new ReentrantLock();
         isShutdown = false;
+        isShutdownNow = false;
         taskQueue = new ConcurrentLinkedQueue<>();
         threadStateById = new HashMap<>();
         threadPool = new ArrayList<>();
         cond = lock.newCondition();
         for (int i = 0; i < threadPoolSize; i++) {
-            threadPool.add(startTaskExecutor(i));
             threadStateById.put(i, false);
+            threadPool.add(startTaskExecutor(i));
         }
     }
 
     @Override
     public void execute(Runnable r) {
         if (isShutdown) {
-            return;
+            throw new ServiceIsTerminatedException("Service is already terminated, " +
+                    "a call to \"execute on\" this service is not allowed!");
         }
         taskQueue.add(r);
         lock.lock();
@@ -50,14 +53,11 @@ public class MyService implements Service {
     @Override
     public void shutdown() {
         isShutdown = true;
-        lock.lock();
-        cond.signalAll();
-        lock.unlock();
     }
 
     @Override
     public void shutdownNow() {
-        isShutdown = true;
+        isShutdownNow = isShutdown =  true;
         for (Thread th : threadPool) {
             th.interrupt();
         }
@@ -70,20 +70,19 @@ public class MyService implements Service {
 
     private Thread startTaskExecutor(int id) {
         Thread th = new Thread(() -> {
-            while (!isShutdown) {
+            while (!isShutdownNow) {
                 Runnable r;
                 try {
                     lock.lock();
-                    while (taskQueue.isEmpty() && !isShutdown)
+                    while (taskQueue.isEmpty() && !isShutdownNow)
                         cond.await();
 
-                    if(isShutdown) {
+                    if(isShutdownNow) {
                         return;
                     }
 
                     r = taskQueue.poll();
                     threadStateById.put(id, true);
-
                 } catch (InterruptedException e) {
                     return;
                 }
