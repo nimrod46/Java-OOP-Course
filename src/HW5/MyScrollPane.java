@@ -20,22 +20,20 @@ public class MyScrollPane extends JPanel implements ComponentListener {
         horizontalScrollBar = new JScrollBar(Adjustable.HORIZONTAL);
         horizontalScrollBar.addAdjustmentListener(e -> {
             contentPanel.setLocation(-e.getValue(), contentPanel.getY());
-            System.out.println(contentPanel.getX());
             panel.repaint();
         });
 
         verScrollBar = new JScrollBar(Adjustable.VERTICAL);
         verScrollBar.addAdjustmentListener(e -> {
             contentPanel.setLocation(contentPanel.getX(), -e.getValue());
-            System.out.println(contentPanel.getX());
             panel.repaint();
         });
         panel.setLayout(null);
         panel.add(contentPanel);
-        addComponentListener(this);
         add(panel, BorderLayout.CENTER);
         add(horizontalScrollBar, BorderLayout.SOUTH);
         add(verScrollBar, BorderLayout.WEST);
+        addComponentListener(this);
     }
 
     @Override
