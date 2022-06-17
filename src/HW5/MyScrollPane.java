@@ -9,11 +9,10 @@ public class MyScrollPane extends JPanel implements ComponentListener {
     private final JPanel panel;
     private final JPanel contentPanel;
     private final JScrollBar horizontalScrollBar;
-    private final JScrollBar verScrollBar;
+    private final JScrollBar verticalScrollBar;
 
     public MyScrollPane(JPanel contentPanel) {
         this.contentPanel = contentPanel;
-        System.out.println(contentPanel.getPreferredSize());
         setLayout(new BorderLayout());
         panel = new JPanel();
 
@@ -23,8 +22,8 @@ public class MyScrollPane extends JPanel implements ComponentListener {
             panel.repaint();
         });
 
-        verScrollBar = new JScrollBar(Adjustable.VERTICAL);
-        verScrollBar.addAdjustmentListener(e -> {
+        verticalScrollBar = new JScrollBar(Adjustable.VERTICAL);
+        verticalScrollBar.addAdjustmentListener(e -> {
             contentPanel.setLocation(contentPanel.getX(), -e.getValue());
             panel.repaint();
         });
@@ -32,7 +31,7 @@ public class MyScrollPane extends JPanel implements ComponentListener {
         panel.add(contentPanel);
         add(panel, BorderLayout.CENTER);
         add(horizontalScrollBar, BorderLayout.SOUTH);
-        add(verScrollBar, BorderLayout.WEST);
+        add(verticalScrollBar, BorderLayout.WEST);
         addComponentListener(this);
     }
 
@@ -40,23 +39,18 @@ public class MyScrollPane extends JPanel implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         setContentPanelSize();
 
-        verScrollBar.setMaximum((int) contentPanel.getSize().getHeight() - panel.getHeight() + horizontalScrollBar.getSize().height);
-        horizontalScrollBar.setMaximum((int) contentPanel.getSize().getWidth() - panel.getWidth() + verScrollBar.getSize().width);
+        verticalScrollBar.setMaximum((int) contentPanel.getSize().getHeight() - panel.getHeight() + horizontalScrollBar.getSize().height / 2);
+        horizontalScrollBar.setMaximum((int) contentPanel.getSize().getWidth() - panel.getWidth() + verticalScrollBar.getSize().width / 2);
 
-        horizontalScrollBar.setVisible(panel.getWidth() < contentPanel.getPreferredSize().getWidth());
-        verScrollBar.setVisible(panel.getHeight() < contentPanel.getPreferredSize().getHeight());
+        horizontalScrollBar.setVisible(panel.getWidth() <= contentPanel.getPreferredSize().getWidth());
+        verticalScrollBar.setVisible(panel.getHeight() <= contentPanel.getPreferredSize().getHeight());
 
         repaint();
     }
 
     private void setContentPanelSize() {
-        int width = (int) contentPanel.getPreferredSize().getWidth();
-        int height = (int) contentPanel.getPreferredSize().getHeight();
-
-        if(width < panel.getSize().width)
-            width = panel.getSize().width;
-        if(height < panel.getSize().height)
-            height = panel.getSize().height;
+        int width = Math.max(contentPanel.getPreferredSize().width,  panel.getSize().width);
+        int height = Math.max(contentPanel.getPreferredSize().height,  panel.getSize().height);
         contentPanel.setSize(new Dimension(width, height));
     }
 
